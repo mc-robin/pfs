@@ -1,0 +1,61 @@
+name: pfs
+author: 颜文泽(robin)
+Revision: 1.0
+
+Overview: 
+	pfs is a filesystem drive for linux, it supports the mininum kernel version is 3.11. now, it's a test verson, 
+	if you have any suggestions or find bugs, please contact me(nnsmgsone@gmail.com).
+
+LIMITS:
+	partition size: 32ZB
+	file size: 16TB
+	directory size: 16TB
+	symbolic link size: 4096bytes
+	filename length: 256bytes(include '\0')
+
+INSTALL:
+	1. cd pfspfs-code 
+	2. make
+	3. insmod pfs.ko
+
+CLEAN:
+	1. make clean
+	2. rmmod pfs.ko	
+
+mkfs command describe: ./mkfs -r VBR-sectors startsector inode-limit image-name
+	-r: VBR sectors(0 to 65535 are availabled)， if you don't specify, it's zero
+	startsector: the first sector of device，it's always zero.
+	inode-limit: max inodes，at least 1024.
+	image-name: device name， like test.img or /dev/sdb
+
+example 1:
+	cd pfspfs-code
+	make
+	dd if=/dev/zero of=test.img bs=512 count=65536 
+	./mkfs 0 65536 10240 test.img
+	insmod pfs.ko
+	mount -o loop -t pfs test.img /tmp
+	.
+ 	.
+ 	. some file operations
+	.
+	.
+	.
+	umount /tmp
+	rmmod pfs.ko
+	
+
+example 2:
+	cd pfspfs-code
+	make
+	./mkfs 0 7907328 102400 /dev/sdb
+	insmod pfs.ko
+	mount -t pfs /dev/sdb /tmp
+	.
+ 	.
+ 	. file operations
+	. 
+ 	.
+ 	.
+	umount /tmp
+	rmmod pfs.ko
