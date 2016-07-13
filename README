@@ -6,6 +6,9 @@ Overview:
 	pfs is a filesystem drive for linux, it supports the mininum kernel version is 3.11. now, it's a test verson, 
 	if you have any suggestions or find bugs, please contact me(nnsmgsone@gmail.com).
 
+NOTES:
+	don't mount on /tmp, i know it's a bug, but a don't understand why. if you know, please contact me
+
 LIMITS:
 	partition size: 32ZB
 	file size: 16TB
