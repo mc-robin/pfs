@@ -37,14 +37,14 @@ example 1:
 	dd if=/dev/zero of=test.img bs=512 count=65536 
 	./mkfs 0 65536 10240 test.img
 	insmod pfs.ko
-	mount -o loop -t pfs test.img /tmp
+	mount -o loop -t pfs test.img tmp
 	.
  	.
  	. some file operations
 	.
 	.
 	.
-	umount /tmp
+	umount tmp
 	rmmod pfs.ko
 	
 
@@ -53,12 +53,12 @@ example 2:
 	make
 	./mkfs 0 7907328 102400 /dev/sdb
 	insmod pfs.ko
-	mount -t pfs /dev/sdb /tmp
+	mount -t pfs /dev/sdb tmp
 	.
  	.
  	. file operations
 	. 
  	.
  	.
-	umount /tmp
+	umount tmp
 	rmmod pfs.ko
