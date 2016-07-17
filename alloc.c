@@ -33,7 +33,7 @@ pfs_alloc0(struct super_block *sb, int type, int64_t *cntp, int64_t *headp,
 		cnt = PFS_INDS_PER_BLOCK;
 		isize += PFS_INDS_PER_BLOCK;
 		sbi->s_spb->s_isize = cpu_to_le64(isize);
-		for(i = 0; i < cnt; i++) 
+		for(i = 0; i < cnt; i++)
 			(*freep)[i] = cpu_to_le64(dno + i);
 		mark_buffer_dirty(*bhp); 
 	}

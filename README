@@ -17,7 +17,7 @@ LIMITS:
 	filename length: 256bytes(include '\0')
 
 INSTALL:
-	1. cd pfspfs-code 
+	1. cd pfs 
 	2. make
 	3. insmod pfs.ko
 
@@ -32,7 +32,7 @@ mkfs command describe: ./mkfs -r VBR-sectors startsector inode-limit image-name
 	image-name: device name， like test.img or /dev/sdb
 
 example 1:
-	cd pfspfs-code
+	cd pfs
 	make
 	dd if=/dev/zero of=test.img bs=512 count=65536 
 	./mkfs 0 65536 10240 test.img
@@ -49,7 +49,7 @@ example 1:
 	
 
 example 2:
-	cd pfspfs-code
+	cd pfs
 	make
 	./mkfs 0 7907328 102400 /dev/sdb
 	insmod pfs.ko

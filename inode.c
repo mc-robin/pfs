@@ -3,6 +3,7 @@
 #include	<linux/version.h>
 #include	<linux/writeback.h>
 #include	<linux/buffer_head.h>
+#include	<linux/mpage.h>
 #include	"pfs.h"
 
 typedef struct{
@@ -116,14 +117,14 @@ pfs_bmap_free(struct inode *inode, Indirect *q, int64_t *offset, int depth, int 
 		if(whole){ 
 			for(i = 0; i < PFS_INBLOCKS; i++){
 				pfs_add_chain(&chain, bh, (int64_t *)bh->b_data + i);
-				pfs_bmap_free(inode, &chain, NULL, depth - 1, 1);
+				pfs_bmap_free(inode, &chain, NULL, depth, 1);
 			}
 			bforget(bh);
 			pfs_atomic_free(inode, q);
 		}else{
 			for(i = offset[0]; i < PFS_INBLOCKS; i++){
 				pfs_add_chain(&chain, bh, (int64_t *)bh->b_data + i);
-				pfs_bmap_free(inode, &chain, i == offset[0] ? offset + 1 : NULL, depth - 1, i == offset[0] ? 0 : 1);
+				pfs_bmap_free(inode, &chain, i == offset[0] ? offset + 1 : NULL, depth, i == offset[0] ? 0 : 1);
 			}	
 			brelse(bh);
 		}

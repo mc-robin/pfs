@@ -264,6 +264,5 @@ main(int argc, char *argv[])
 		return -1;
 	}
 	close(fd);
-	printf("mkfs: finished\n");
 	return 0;
 }
