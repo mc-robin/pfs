@@ -24,18 +24,6 @@ pfs_get_blocks(struct pfs_sb_info *sbi)
 static int
 pfs_recovery(struct super_block *s)
 {
-#if 0
-	int64_t x, y;
-	struct buffer_head *bh;
-
-	x = le64_to_cpu(PFS_SB(s)->s_spb->s_bhead);
-	y = le64_to_cpu(PFS_SB(s)->s_spb->s_fsize) / PFS_BLOCKSIZ;
-	while(x < y){
-		if((bh = sb_bread(s, x / PFS_STRS_PER_BLOCK)))
-			brelse(bh);
-		x += PFS_STRS_PER_BLOCK;
-	}	
-#endif
 	return 0;
 }
 
